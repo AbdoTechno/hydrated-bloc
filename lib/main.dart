@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:training_bloc/controllers/cubit/counter_cubit.dart';
+import 'package:training_bloc/controllers/bloc/counter_bloc.dart';
+// import 'package:training_bloc/controllers/cubit/counter_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     print('build method called');
     return BlocProvider(
-      create: (context) => CounterCubit(),
+      create: (context) => CounterBloc(),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -38,7 +39,7 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: .center,
             children: [
               const Text('You have pushed the button this many times:'),
-              BlocBuilder<CounterCubit, CounterState>(
+              BlocBuilder<CounterBloc, CounterState>(
                 builder: (context, state) {
                   print('builder method called');
                   return Text(
@@ -50,14 +51,14 @@ class MyHomePage extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: BlocBuilder<CounterCubit, CounterState>(
+        floatingActionButton: BlocBuilder<CounterBloc, CounterState>(
           builder: (context, state) => Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
                 onPressed: () {
                   print('increment button pressed');
-                  context.read<CounterCubit>().incrementCounter();
+                  context.read<CounterBloc>().add(IncrementEvent());
                 },
                 tooltip: 'Increment',
                 child: const Icon(Icons.add),
@@ -66,7 +67,7 @@ class MyHomePage extends StatelessWidget {
               FloatingActionButton(
                 onPressed: () {
                   print('decrement button pressed');
-                  context.read<CounterCubit>().decrementCounter();
+                  context.read<CounterBloc>().add(DecrementEvent());
                 },
                 tooltip: 'Decrement',
                 child: const Icon(Icons.remove),
@@ -78,3 +79,8 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
+
+// in the above code we are using BlocProvider to provide 
+//the CounterBloc to the widget tree and we are using BlocBuilder to rebuild the widget 
+//when the state changes and we are using 
+//context.read<CounterBloc>() to access the bloc and add events to the bloc.

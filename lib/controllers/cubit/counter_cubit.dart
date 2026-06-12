@@ -25,7 +25,7 @@ class CounterCubit extends Cubit<CounterState> {
 //   }
 // }  
 // but it is not a good practice to emit primitive data type as state
-// because it will be difficult to manage the state in future 
+// because it will be difficult to manage the state in future f
 //when we have multiple states and also it will be difficult to debug the state changes.
 // so it is better to create state class and emit the state class object.
 
