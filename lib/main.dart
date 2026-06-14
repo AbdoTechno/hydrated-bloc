@@ -47,7 +47,24 @@ class MyHomePage extends StatelessWidget {
             mainAxisAlignment: .center,
             children: [
               const Text('You have pushed the button this many times:'),
-              BlocBuilder<CounterBloc, CounterState>(
+              BlocConsumer<CounterBloc, CounterState>(
+                listener: (BuildContext context, CounterState state) {
+                  if (state.counterValue == 10) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Counter updated to ${state.counterValue}',
+                        ),
+                        duration: const Duration(seconds: 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: Colors.green ,
+                      ),
+                    );
+                  }
+                },
+
                 builder: (context, state) {
                   print('builder method called');
                   return Text(
