@@ -4,7 +4,7 @@ class UserModel extends Equatable {
   final String name;
   final int id;
   final String email;
-  UserModel({required this.name, required this.email, required this.id});
+  const UserModel({required this.name, required this.email, required this.id});
 
   @override
   List<Object?> get props => [name, email, id];

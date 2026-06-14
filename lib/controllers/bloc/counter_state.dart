@@ -11,6 +11,6 @@ class CounterInitState extends CounterState {
 
 class CounterUpdateState extends CounterState {
   // CounterUpdateState(super.counterValue);
-  CounterUpdateState(int counterValue) : super(counterValue);
+  CounterUpdateState(super.counterValue);
 
 }
